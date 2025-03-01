@@ -22,10 +22,18 @@ func startRepl() {
 			continue
 		}
 
-		// get command
-		commandName := words[0]
+		// get command and run
+		cmdName := words[0]
 
-		fmt.Printf("Your command was: %s\n", commandName)
+		if cmd, ok := getCommands()[cmdName]; ok {
+			if err := cmd.callback(); err != nil {
+				fmt.Println("Error: ", err)
+			}
+			continue
+		} else {
+			fmt.Println("Unknown command")
+			continue
+		}
 	}
 }
 
@@ -33,4 +41,26 @@ func cleanInput(text string) []string {
 	output := strings.ToLower(text)
 	words := strings.Fields(output)
 	return words
+}
+
+type cliCommand struct {
+	name        string
+	description string
+	callback    func() error
+}
+
+func getCommands() map[string]cliCommand {
+	// initialize commands
+	return map[string]cliCommand{
+		"help": {
+			name:        "help",
+			description: "Displays a help message",
+			callback:    commandHelp,
+		},
+		"exit": {
+			name:        "exit",
+			description: "Exit the Pokedex",
+			callback:    commandExit,
+		},
+	}
 }
