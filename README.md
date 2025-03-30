@@ -14,18 +14,18 @@ This is a [guided project](https://www.boot.dev/courses/build-pokedex-cli-golang
 
 ## Usage
 
-Go version 1.24 or higher is required to run this project.
+Go version 1.24 or higher is required to run this application, and `~/go/bin` should be in your PATH.
 
-Clone the repository and navigate to the project directory. Run the following command to build the project:
+To install the application, run this command in your terminal:
 
 ```bash
-go build
+go install github.com/kei-the-gae/pokedex@latest
 ```
 
-Run the following command to start the Pokedex CLI application:
+After installation, you can run the application by executing the following command in your terminal:
 
 ```bash
-./pokedex
+pokedex
 ```
 
 You can run the following command with the application running to view the available commands:
